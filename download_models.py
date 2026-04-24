@@ -2,16 +2,6 @@
 download_models.py
 ==================
 Downloads trained .keras model files from Google Drive at startup.
-This is needed because Render's free tier cannot train models —
-we upload the trained files to Google Drive and download them here.
-
-Steps to get your Google Drive file IDs:
-  1. Upload your .keras file to Google Drive
-  2. Right-click → Share → Change to "Anyone with the link"
-  3. Copy the link — it looks like:
-     https://drive.google.com/file/d/1ABC123XYZ.../view
-  4. The file ID is the part between /d/ and /view → "1ABC123XYZ..."
-  5. Paste that ID below
 """
 
 import os
@@ -19,17 +9,15 @@ import logging
 
 log = logging.getLogger(__name__)
 
-# ── Paste your Google Drive file IDs here ────────────────────────────────────
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 PNEUMONIA_FILE_ID = "1KEZ0MVCTdCbKGVxp9FEPe5-nYYMeHhvZ"
 SKIN_FILE_ID      = "1IXSt7wT8tfLSMr05Sdhx9q5HcV89ru6v"
 
 MODEL_FILES = {
-    "pneumonia_mobilenet.keras":      PNEUMONIA_FILE_ID,
-    "skin_mobilenet.keras":           SKIN_FILE_ID,
+    os.path.join(BASE_DIR, "pneumonia_mobilenet.keras"): PNEUMONIA_FILE_ID,
+    os.path.join(BASE_DIR, "skin_mobilenet.keras"):      SKIN_FILE_ID,
 }
-
-# skin_mobilenet_classes.json is small — commit it directly to GitHub
-# (remove it from .gitignore first)
 
 
 def download_models():
@@ -40,22 +28,18 @@ def download_models():
         log.error("gdown not installed. Run: pip install gdown")
         return
 
-    for filename, file_id in MODEL_FILES.items():
-        if os.path.exists(filename):
-            log.info("✓ %s already exists — skipping download.", filename)
-            continue
-
-        if "PASTE_" in file_id:
-            log.warning("File ID not set for %s — skipping.", filename)
+    for filepath, file_id in MODEL_FILES.items():
+        if os.path.exists(filepath):
+            log.info("✓ %s already exists — skipping download.", filepath)
             continue
 
         url = f"https://drive.google.com/uc?id={file_id}"
-        log.info("Downloading %s from Google Drive…", filename)
+        log.info("Downloading %s from Google Drive…", os.path.basename(filepath))
         try:
-            gdown.download(url, filename, quiet=False)
-            log.info("✓ %s downloaded successfully.", filename)
+            gdown.download(url, filepath, quiet=False)
+            log.info("✓ %s downloaded successfully.", os.path.basename(filepath))
         except Exception as exc:
-            log.error("Failed to download %s: %s", filename, exc)
+            log.error("Failed to download %s: %s", os.path.basename(filepath), exc)
 
 
 if __name__ == "__main__":
