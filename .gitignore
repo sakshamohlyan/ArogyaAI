@@ -3,7 +3,11 @@
 *.h5
 
 # Datasets — download separately from Kaggle
-datasets/
+# In .gitignore
+datasets/pneumonia/
+datasets/skin/
+!datasets/diabetes/diabetes.csv
+!datasets/heart/heart_cleveland_upload.csv
 
 # Python
 __pycache__/
