@@ -1,0 +1,28 @@
+# Model files — too large for GitHub, generated locally
+*.keras
+*.h5
+skin_mobilenet_classes.json
+skin_resnet_classes.json
+
+# Datasets — download separately from Kaggle
+datasets/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+venv/
+env/
+.env
+
+# Logs
+*.log
+training_log.txt
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
