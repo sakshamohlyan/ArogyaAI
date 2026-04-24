@@ -689,7 +689,30 @@ def pred_skin():
 
 if __name__ == "__main__":
     from download_models import download_models
-    download_models()          # pulls .keras files from Drive if missing
-    FORCE_RETRAIN = False      # never retrain on Render
-    init_models()
+    download_models()
+    FORCE_RETRAIN = False
+
+    # Load pre-trained models directly — skip retraining
+    try:
+        MODELS["pneumonia"] = tf.keras.models.load_model(MODEL_PATHS["pneumonia"])
+        log.info("Loaded pneumonia model from disk.")
+    except Exception as e:
+        log.warning("Pneumonia model load failed: %s", e)
+
+    try:
+        MODELS["skin"] = tf.keras.models.load_model(MODEL_PATHS["skin"])
+        log.info("Loaded skin model from disk.")
+    except Exception as e:
+        log.warning("Skin model load failed: %s", e)
+
+    try:
+        MODELS["diabetes"] = train_diabetes()
+    except Exception as e:
+        log.warning("Diabetes model failed: %s", e)
+
+    try:
+        MODELS["heart"] = train_heart()
+    except Exception as e:
+        log.warning("Heart model failed: %s", e)
+
     app.run(host="0.0.0.0", port=5050, debug=False)
