@@ -682,5 +682,8 @@ def pred_skin():
 # ── Entry point ───────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
+    from download_models import download_models
+    download_models()          # pulls .keras files from Drive if missing
+    FORCE_RETRAIN = False      # never retrain on Render
     init_models()
     app.run(host="0.0.0.0", port=5050, debug=False)
