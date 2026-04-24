@@ -52,6 +52,12 @@ log = logging.getLogger(__name__)
 app = Flask(__name__)
 CORS(app)
 
+@app.route("/")
+def index():
+    return {"status": "ArogyaAI API is running"}, 200
+
+
+
 MODELS: dict = {}
 IMG_SIZE    = 224
 BATCH_SIZE  = 32

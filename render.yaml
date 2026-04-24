@@ -2,7 +2,7 @@ services:
   - type: web
     name: arogyaai-api
     runtime: python
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install -r requirements.txt && python download_models.py
     startCommand: python app.py
     envVars:
       - key: PYTHON_VERSION
