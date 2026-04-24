@@ -1,6 +1,6 @@
 flask
 flask-cors
-tensorflow-cpu==2.16.2
+tensorflow-cpu
 scikit-learn
 pillow
 numpy
