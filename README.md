@@ -17,6 +17,22 @@ ArogyaAI is an end-to-end AI-powered clinical decision support system developed 
 
 ---
 
+## 📸 Screenshots
+
+### 🫁 PneumoScan — Chest X-Ray Analysis
+![PneumoScan](screenshots/pneumoscan.png)
+
+### 🔬 DermaScan — Skin Lesion Detection
+![DermaScan](screenshots/dermascan.png)
+
+### 💉 Diabetes Analyser
+![Diabetes Analyser](screenshots/diabetes_analyser.png)
+
+### ❤️ Heart Risk Analyser
+![Heart Risk Analyser](screenshots/heart_analyser.png)
+
+---
+
 ## 🏗️ Architecture
 
 ```
@@ -43,6 +59,12 @@ ArogyaAI/
 ├── streamlit_app.py              # Streamlit frontend UI
 ├── pretrain.py                   # One-time script: trains & saves CNN models
 ├── prepare_skin_dataset.py       # Organises HAM10000 images into class folders
+│
+├── screenshots/                  # UI screenshots for README
+│   ├── pneumoscan.png
+│   ├── dermascan.png
+│   ├── diabetes_analyser.png
+│   └── heart_analyser.png
 │
 ├── datasets/                     # Download separately from Kaggle (gitignored)
 │   ├── diabetes/
