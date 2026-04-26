@@ -1,10 +1,8 @@
 services:
   - type: web
     name: arogyaai-api
-    runtime: python
-    buildCommand: "pip install -r requirements.txt && python download_models.py"
-    startCommand: "python app.py"
+    runtime: docker
+    dockerfilePath: ./Dockerfile
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.10.13
-  
+      - key: PYTHONUNBUFFERED
+        value: "1"
